@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,12 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WSTLibrary.Models;
 
 namespace WSTLibrary.Controllers
 {
-    public class AuthorsController : ApiController
+  [EnableCors(origins: "*", headers: "*", methods: "*")]
+  public class AuthorsController : ApiController
     {
         private LibraryContext db = new LibraryContext();
 

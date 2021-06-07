@@ -1,0 +1,29 @@
+<div class="list row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-6">
+      <h4>Lista książek</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let author of authors"
+
+        >
+          {{ author.authorName }}
+          {{ author.authorSurname }}
+        </li>
+
+        <li
+          class="list-group-item"
+          *ngFor="let book of books"
+
+        >
+          {{ book.bookName }}
+          <!-- {{ author.authorSurname }} -->
+        </li>
+      </ul>
+
+    </div>
+
+    </div>
+
