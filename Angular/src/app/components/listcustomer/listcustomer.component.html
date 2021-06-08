@@ -1,0 +1,22 @@
+<div class="list row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-6">
+      <h4>Lista klientów</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let customer of customers"
+
+        >
+          {{ customer.customerName }}
+          {{ customer.customerSurname }}
+        </li>
+
+       
+      </ul>
+
+    </div>
+
+    </div>
+

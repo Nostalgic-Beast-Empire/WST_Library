@@ -20,21 +20,11 @@ export class ListbookauthorComponent implements OnInit {
   constructor(private authorService: AuthorsService,private bookService: BooksService) { }
 
   ngOnInit(): void {
-    this.getAuthors();
+    this.getBooks();
   }
 
-  getAuthors(){
-    this.authorService.getAll()
-      .subscribe(
-        data =>{
-         
-          this.authors = data as Author[];
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+  getBooks(){
+
       this.bookService.getAll()
       .subscribe(
         data =>{

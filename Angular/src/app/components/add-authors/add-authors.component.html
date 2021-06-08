@@ -22,15 +22,15 @@
             />
         </div>
 
-        <button (click)="saveAuthor()" class="btn btn-success">Utwórz</button>
+        <button (click)="saveAuthor()" [routerLink]="['/listauthor']" class="btn btn-success">Utwórz</button>
     </div>
 
-        <div *ngIf="submitted">
+        <!-- <div *ngIf="submitted">
     
             <h2>Formularz został wysłany :)</h2>
             <button (click)="newAuthor()" class="btn btn-success">Dodaj nowego autora</button>
 
-        </div>
+        </div> -->
 
 </div>
 

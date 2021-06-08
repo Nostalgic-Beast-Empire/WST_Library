@@ -21,8 +21,9 @@ namespace WSTLibrary.Controllers
         // GET: api/Books
         public IQueryable<Book> GetBook()
         {
-            return db.Book;
+            return db.Book.Include(c => c.author);
         }
+
 
         // GET: api/Books/5
         [ResponseType(typeof(Book))]
