@@ -28,7 +28,18 @@ export class ListcustomerComponent implements OnInit {
       }
     );
 
-   
+}
+
+DeleteCustomer(id: number){
+  this.customersService.deleteById(id)
+  .subscribe(
+    response => {
+      console.log(response);
+      this.getCustomers();
+    },
+    error => {
+      console.log(error);
+    });
 }
 
 }

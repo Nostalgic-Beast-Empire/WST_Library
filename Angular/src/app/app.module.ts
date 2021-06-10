@@ -10,6 +10,7 @@ import { ListbookauthorComponent } from './components/listbookauthor/listbookaut
 import { ListauthorComponent } from './components/listauthor/listauthor.component';
 import { ListcustomerComponent } from './components/listcustomer/listcustomer.component';
 import { ListborrowsComponent } from './components/listborrows/listborrows.component';
+import { AddBooksComponent } from './components/add-books/add-books.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ListborrowsComponent } from './components/listborrows/listborrows.compo
     ListbookauthorComponent,
     ListauthorComponent,
     ListcustomerComponent,
-    ListborrowsComponent
+    ListborrowsComponent,
+    AddBooksComponent
   ],
   imports: [
     BrowserModule,

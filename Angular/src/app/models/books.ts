@@ -5,6 +5,6 @@ export interface Book{
     authorId: number,
     bookName: string,
     pagecount: number,
-    author: Author
+    author?: Author
 
 }

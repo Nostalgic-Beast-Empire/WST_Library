@@ -35,8 +35,18 @@ export class ListbookauthorComponent implements OnInit {
           console.log(error);
         }
       );
+  }
 
-     
+  DeleteBook(id: number){
+    this.bookService.deleteById(id)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.getBooks();
+      },
+      error => {
+        console.log(error);
+      });
   }
 
 

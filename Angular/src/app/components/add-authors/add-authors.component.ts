@@ -40,13 +40,5 @@ export class AddAuthorsComponent implements OnInit {
     );
   }
 
-  newAuthor(){
-    this.submitted = false;
-    this.author={
-      authorName: '',
-      authorSurname:'',
-      authorId:0
-    };
-
-  }
+  
 }

@@ -1,26 +1,56 @@
 <div class="list row">
-    <div class="col-md-8">
-    </div>
-    <div class="col-md-6">
-      <h4>Lista książek</h4>
-      <ul class="list-group">
+  <div class="col-md-8">
+  </div>
+  <div class="col-md-6">
+    <h4>Lista książek</h4>
+    <ul class="list-group">
+      <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tytuł</th>
+              <th scope="col">Liczba stron</th>
+              <th scope="col">Imię autora</th>
+              <th scope="col">Naziwko autora</th>
+              <th scope="col">Edycja</th>
+              <th scope="col">Usuwanie</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr
+       
+        *ngFor="let book of books; let i = index"
+
+      >
+      <th scope="row">{{i+1}}</th>
+      <td>{{ book.bookName }}</td>
+      <td>{{ book.pagecount }}</td>
+      <td>{{ book.author.authorName }}</td>
+      <td>{{ book.author.authorSurname }}</td>
+      <td><button type="button" class="btn btn-dark" [routerLink]="['/addbook']">Edytuj</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="DeleteBook(book.bookId)" >Usuń</button></td>
         
+        
+          </tr>
+  </tbody>
+</table>
 
-        <li
-          class="list-group-item"
-          *ngFor="let book of books"
+     
+    </ul>
 
-        >
-        Książka:
-          {{ book.bookName }}
-          Autor:
-          {{ book.author.authorName }}
-          {{ book.author.authorSurname }}
-          <!-- {{ author.authorSurname }} -->
-        </li>
-      </ul>
+    <!-- <button
+    class="btn btn-dark"
+    type="button"
+    (click)="searchTitle()"
+   
+  >
+    Search
+  </button> -->
 
-    </div>
+  <button type="button" class="btn btn-dark" [routerLink]="['/addbook']">Dodaj nową książe</button>
 
-    </div>
+
+  </div>
+
+  </div>
 

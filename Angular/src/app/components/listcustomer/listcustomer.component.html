@@ -1,22 +1,54 @@
 <div class="list row">
-    <div class="col-md-8">
-    </div>
-    <div class="col-md-6">
-      <h4>Lista klientów</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let customer of customers"
-
-        >
-          {{ customer.customerName }}
-          {{ customer.customerSurname }}
-        </li>
-
+  <div class="col-md-8">
+  </div>
+  <div class="col-md-6">
+    <h4>Lista klientów</h4>
+    <ul class="list-group">
+      <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Imię klienta</th>
+              <th scope="col">Naziwko klienta</th>
+              <th scope="col">Data urodzenia</th>
+              <th scope="col">Edycja</th>
+              <th scope="col">Usuwanie</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr
        
-      </ul>
+        *ngFor="let customer of customers; let i = index"
 
-    </div>
+      >
+      <th scope="row">{{i+1}}</th>
+      <td>{{ customer.customerName }}</td>
+      <td>{{ customer.customerSurname }}</td>
+      <td>{{ customer.customerBirthdate }}</td>
+      <td><button type="button" class="btn btn-dark" [routerLink]="['/addauthors']">Edytuj</button></td>
+      <td><button type="button" class="btn btn-danger" (click) = "DeleteCustomer(customer.customerId)">Usuń</button></td>
+        
+        
+          </tr>
+  </tbody>
+</table>
 
-    </div>
+     
+    </ul>
+
+    <!-- <button
+    class="btn btn-dark"
+    type="button"
+    (click)="searchTitle()"
+   
+  >
+    Search
+  </button> -->
+
+  <button type="button" class="btn btn-dark" [routerLink]="['/addauthors']">Dodaj nowego autora</button>
+
+
+  </div>
+
+  </div>
 
