@@ -7,11 +7,13 @@ import{ListauthorComponent} from './components/listauthor/listauthor.component';
 import{ListcustomerComponent} from './components/listcustomer/listcustomer.component';
 import{ListborrowsComponent} from './components/listborrows/listborrows.component';
 import { AddBooksComponent } from './components/add-books/add-books.component';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 
 
 const routes: Routes = [
   { path: 'addauthors', component:AddAuthorsComponent},
   { path: 'addbook', component:AddBooksComponent},
+  { path: 'addcustomer', component:AddCustomerComponent},
   { path: 'listbookauthor', component:ListbookauthorComponent},
   { path: 'listauthor', component:ListauthorComponent},
   { path: 'listcustomer', component:ListcustomerComponent},

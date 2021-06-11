@@ -16,6 +16,6 @@ namespace WSTLibrary.Models
         [Required]
         [MaxLength(50)]
         public string customerSurname { get; set; }
-        public DateTime customerBirthdate { get; set; }
+        public string customerBirthdate { get; set; }
     }
 }

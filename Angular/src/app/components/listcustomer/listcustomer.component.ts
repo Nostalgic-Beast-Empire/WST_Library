@@ -10,6 +10,17 @@ import {CustomersService} from 'src/app/services/customers.service';
 export class ListcustomerComponent implements OnInit {
   customers: any=[];
 
+  customer: Customer={
+    customerName:'',
+    customerSurname:'',
+    customerBirthdate: '',
+    customerId: 0
+
+  };
+
+  public show:boolean = false;
+  Id:number = 0;
+
   constructor(private customersService: CustomersService) { }
 
   ngOnInit(): void {
@@ -29,7 +40,6 @@ export class ListcustomerComponent implements OnInit {
     );
 
 }
-
 DeleteCustomer(id: number){
   this.customersService.deleteById(id)
   .subscribe(
@@ -41,5 +51,40 @@ DeleteCustomer(id: number){
       console.log(error);
     });
 }
+toggle(id:number) {
+  this.show = !this.show;
+  this.Id = id;
+  if(!this.show){
+    this.Id = 0;
+  }
 
+}
+shouldDisable(id:number){
+  if(this.Id == 0){
+    return false;
+  }else if(this.Id != id){
+      return true;
+  }else {
+  return false;    
+  }
+
+}
+EditCustomer() {
+  const buffer: Customer = {
+    customerName:this.customer.customerName,
+    customerSurname:this.customer.customerSurname,
+    customerBirthdate: this.customer.customerBirthdate,
+    customerId:this.Id,
+  };
+  this.customersService.update(this.Id,buffer)
+    .subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
+
+      window.location.reload(); 
+}
 }

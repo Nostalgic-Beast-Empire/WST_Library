@@ -23,7 +23,7 @@
         <th scope="row">{{i+1}}</th>
         <td>{{ author.authorName }}</td>
         <td>{{ author.authorSurname }}</td>
-        <td><button type="button" class="btn btn-dark" [routerLink]="['/addauthors']">Edytuj</button></td>
+        <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(author.authorId)" (click)="toggle(author.authorId)">Edytuj</button></td>
         <td><button type="button" class="btn btn-danger"  (click)="DeleteAuthor(author.authorId)">Usuń</button></td>
           
           
@@ -34,19 +34,38 @@
        
       </ul>
 
-      <!-- <button
-      class="btn btn-dark"
-      type="button"
-      (click)="searchTitle()"
-     
-    >
-      Search
-    </button> -->
-
     <button type="button" class="btn btn-dark" [routerLink]="['/addauthors']">Dodaj nowego autora</button>
 
 
     </div>
 
     </div>
+
+  <ng-container *ngIf="show">
+    <div class="submit-form" style="width: 500px;">
+      <div class="form-group">
+          <label for="authorname">Imię Autora</label>
+          <input
+              type = "text"
+              class = "form-control"
+              required
+              [(ngModel)]="author.authorName"
+              name="authorname"
+          />
+      </div>
+
+      <div class="form-group">
+          <label for="authorSurname">Nazwisko Autora</label>
+          <input
+              type = "text"
+              class = "form-control"
+              required
+              [(ngModel)]="author.authorSurname"
+              name="authorSurname"
+          />
+      </div>
+
+      <button (click)="EditAuthor()" [routerLink]="['/listauthor']" class="btn btn-success">Edytuj</button>
+</div>
+  </ng-container>
 

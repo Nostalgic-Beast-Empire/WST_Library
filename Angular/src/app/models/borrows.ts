@@ -5,8 +5,8 @@ export interface Borrow{
     borrowId: number,
     customerId: number,
     bookId: number,
-    takenDate: Date,
-    broughtDate: Date,
+    takenDate: string,
+    broughtDate: string,
     book: Book,
     customer: Customer,
 
