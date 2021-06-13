@@ -27,7 +27,7 @@
       <td>{{ book.pagecount }}</td>
       <td>{{ book.author.authorName }}</td>
       <td>{{ book.author.authorSurname }}</td>
-      <td><button type="button" class="btn btn-dark" [routerLink]="['/addbook']">Edytuj</button></td>
+      <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(book.bookId)" (click)="toggle(book.bookId)">Edytuj</button></td>
       <td><button type="button" class="btn btn-danger" (click)="DeleteBook(book.bookId)" >Usuń</button></td>
         
         
@@ -38,15 +38,6 @@
      
     </ul>
 
-    <!-- <button
-    class="btn btn-dark"
-    type="button"
-    (click)="searchTitle()"
-   
-  >
-    Search
-  </button> -->
-
   <button type="button" class="btn btn-dark" [routerLink]="['/addbook']">Dodaj nową książe</button>
 
 
@@ -54,3 +45,41 @@
 
   </div>
 
+  <ng-container *ngIf="show">
+    <div class="submit-form" style="width: 500px;">
+      <div class="form-group">
+          <label for="bookName">Tytuł książki</label>
+          <input
+              type = "text"
+              class = "form-control"
+              required
+              [(ngModel)]="book.bookName"
+              name="bookName"
+          />
+      </div>
+
+      <div class="form-group">
+          <label for="pagecount">Liczba stron</label>
+          <input
+              type = "number"
+              class = "form-control"
+              required
+              [(ngModel)]="book.pagecount"
+              name="pagecount"
+          />
+      </div>
+
+      <div class="form-group">
+        Wybierz autora
+    <select class="form-select" aria-label="Default select example"
+    [(ngModel)]="book.authorId">
+        <option value="1"
+        *ngFor="let author of authors;"
+        [ngValue]="author.authorId">{{ author.authorName }} {{ author.authorSurname }}</option>
+
+      </select>
+    </div>
+
+      <button (click)="EditBook()" [routerLink]="['/listbookauthor']" class="btn btn-success">Edytuj</button>
+</div>
+  </ng-container>

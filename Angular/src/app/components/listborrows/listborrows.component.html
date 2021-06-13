@@ -1,25 +1,105 @@
 <div class="list row">
-    <div class="col-md-8">
-    </div>
-    <div class="col-md-6">
-      <h4>Lista wypożyczeń</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let borrow of borrows"
-
-        >
-          {{ borrow.takenDate }}
-          {{ borrow.book.bookName }}
-          {{ borrow.customer.customerName }}
-          {{ borrow.customer.customerSurname }}
-
-        </li>
-
+  <div class="col-md-8">
+  </div>
+  <div class="col-md-6">
+    <h4>Lista wypożyczeń</h4>
+    <ul class="list-group">
+      <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Data wypożyczenia</th>
+              <th scope="col">Data oddania</th>
+              <th scope="col">Tytuł książki</th>
+              <th scope="col">Imię klienta</th>
+              <th scope="col">Nazwisko klienta</th>
+              <th scope="col">Edycja</th>
+              <th scope="col">Zwrot książki</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr
        
-      </ul>
+        *ngFor="let borrow of borrows; let i = index"
 
-    </div>
+      >
+      <th scope="row">{{i+1}}</th>
+      <td>{{ borrow.takenDate }}</td>
+      <td>{{ borrow.broughtDate }}</td>
+      <td>{{ borrow.book.bookName }}</td>
+      <td>{{ borrow.customer.customerName }}</td>
+      <td>{{ borrow.customer.customerSurname }}</td>
 
-    </div>
+      <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(borrow.borrowId)" (click)="toggle(borrow.borrowId)">Edytuj</button></td>
+      <td><button type="button" class="btn btn-warning" [disabled]="shouldDisable(borrow.borrowId)" (click)="toggle2(borrow.borrowId,borrow.customerId,borrow.bookId,borrow.takenDate)" >Zwrot</button></td>
+        
+          </tr>
+  </tbody>
+</table>
 
+     
+    </ul>
+
+  <button type="button" class="btn btn-dark" [routerLink]="['/addborrow']">Dodaj nowe wypożyczenie</button>
+
+
+  </div>
+
+  </div>
+
+  <ng-container *ngIf="show">
+    <div class="submit-form">
+      <div class="form-group">
+          <label for="takenDate">Data wypożyczenia</label>
+          <input
+              type = "date"
+              class = "form-control"
+              required
+              [(ngModel)]="borrow.takenDate"
+              name="takenDate"
+          />
+      </div>
+
+      <div class="form-group">
+          Wybierz książkę
+      <select class="form-select" aria-label="Default select example"
+      [(ngModel)]="borrow.bookId">
+          <option value="1"
+          *ngFor="let book of books;"
+          [ngValue]="book.bookId">{{ book.bookName }}</option>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+          Wybierz klienta
+      <select class="form-select" aria-label="Default select example"
+      [(ngModel)]="borrow.customerId">
+          <option value="1"
+          *ngFor="let customer of customers;"
+          [ngValue]="customer.customerId">{{ customer.customerName }} {{ customer.customerSurname }}</option>
+
+        </select>
+      </div>
+
+      <button (click)="EditBorrow()" [routerLink]="['/listborrow']" class="btn btn-success">Utwórz</button>
+  </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="show2">
+    <div class="submit-form">
+      <div class="form-group">
+          <label for="broughtDate">Data wypożyczenia</label>
+          <input
+              type = "date"
+              class = "form-control"
+              required
+              [(ngModel)]="borrow.broughtDate"
+              name="broughtDate"
+          />
+      </div>
+
+      <button (click)="broughtBorrow()" [routerLink]="['/listborrow']" class="btn btn-success">Utwórz</button>
+  </div>
+  </ng-container>

@@ -24,7 +24,7 @@
         <td>{{ author.authorName }}</td>
         <td>{{ author.authorSurname }}</td>
         <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(author.authorId)" (click)="toggle(author.authorId)">Edytuj</button></td>
-        <td><button type="button" class="btn btn-danger"  (click)="DeleteAuthor(author.authorId)">Usuń</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="DeleteAuthor(author.authorId)"  data-bs-toggle="tooltip" data-bs-placement="right" title="Usunięcie autora oznacza również usunięcie jego książek">Usuń</button></td>
           
           
             </tr>

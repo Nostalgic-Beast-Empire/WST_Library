@@ -7,7 +7,7 @@ export interface Borrow{
     bookId: number,
     takenDate: string,
     broughtDate: string,
-    book: Book,
-    customer: Customer,
+    book?: Book,
+    customer?: Customer,
 
 }

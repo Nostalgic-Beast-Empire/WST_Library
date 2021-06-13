@@ -12,6 +12,7 @@ import { ListcustomerComponent } from './components/listcustomer/listcustomer.co
 import { ListborrowsComponent } from './components/listborrows/listborrows.component';
 import { AddBooksComponent } from './components/add-books/add-books.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { AddBorrowComponent } from './components/add-borrow/add-borrow.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AddCustomerComponent } from './components/add-customer/add-customer.com
     ListborrowsComponent,
     AddBooksComponent,
     AddCustomerComponent,
+    AddBorrowComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,36 @@
+<div class="submit-form">
+        <div class="form-group">
+            <label for="takenDate">Data wypożyczenia</label>
+            <input
+                type = "date"
+                class = "form-control"
+                required
+                [(ngModel)]="borrow.takenDate"
+                name="takenDate"
+            />
+        </div>
+
+        <div class="form-group">
+            Wybierz książkę
+        <select class="form-select" aria-label="Default select example"
+        [(ngModel)]="borrow.bookId">
+            <option value="1"
+            *ngFor="let book of books;"
+            [ngValue]="book.bookId">{{ book.bookName }}</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+            Wybierz klienta
+        <select class="form-select" aria-label="Default select example"
+        [(ngModel)]="borrow.customerId">
+            <option value="1"
+            *ngFor="let customer of customers;"
+            [ngValue]="customer.customerId">{{ customer.customerName }} {{ customer.customerSurname }}</option>
+
+          </select>
+        </div>
+
+        <button (click)="saveBorrow()" [routerLink]="['/listborrow']" class="btn btn-success">Utwórz</button>
+    </div>

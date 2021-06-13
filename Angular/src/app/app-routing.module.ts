@@ -8,11 +8,12 @@ import{ListcustomerComponent} from './components/listcustomer/listcustomer.compo
 import{ListborrowsComponent} from './components/listborrows/listborrows.component';
 import { AddBooksComponent } from './components/add-books/add-books.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
-
+import { AddBorrowComponent } from './components/add-borrow/add-borrow.component';
 
 const routes: Routes = [
   { path: 'addauthors', component:AddAuthorsComponent},
   { path: 'addbook', component:AddBooksComponent},
+  { path: 'addborrow', component:AddBorrowComponent},
   { path: 'addcustomer', component:AddCustomerComponent},
   { path: 'listbookauthor', component:ListbookauthorComponent},
   { path: 'listauthor', component:ListauthorComponent},

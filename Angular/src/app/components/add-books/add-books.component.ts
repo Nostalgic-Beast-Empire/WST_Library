@@ -29,7 +29,6 @@ export class AddBooksComponent implements OnInit {
   ngOnInit(): void {
     this.getAuthors();
   }
-
   saveBook(){
     const buffer: Book = {
       bookId:this.book.bookId,
@@ -49,7 +48,6 @@ export class AddBooksComponent implements OnInit {
   error =>console.log(error)
     );
   }
-
   getAuthors(){
 
     this.authorService.getAll()
