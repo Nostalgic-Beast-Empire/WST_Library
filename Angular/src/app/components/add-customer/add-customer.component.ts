@@ -37,7 +37,10 @@ export class AddCustomerComponent implements OnInit {
         console.log(response);
       },
 
-  error =>console.log(error)
+      error =>{
+        console.log(error);
+        alert("Nie podałeś wszystkich danych");
+      }
     );
   }
 }

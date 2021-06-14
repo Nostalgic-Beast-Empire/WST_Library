@@ -15,8 +15,9 @@
         <div class="form-group">
             <label for="pagecount">Liczba stron</label>
             <input
-                type = "text"
+                type = "number"
                 class = "form-control"
+                min="0"
                 required
                 [(ngModel)]="book.pagecount"
                 name="pagecount"
@@ -34,7 +35,7 @@
           </select>
         </div>
 
-        <button (click)="saveBook()" [routerLink]="['/listbookauthor']" class="btn btn-success">Utwórz</button>
+        <button (click)="saveBook()" [routerLink]="['/listbookauthor']" class="editbtn btn btn-success">Utwórz</button>
     </div>
 
 </div>

@@ -13,6 +13,7 @@ import { ListborrowsComponent } from './components/listborrows/listborrows.compo
 import { AddBooksComponent } from './components/add-books/add-books.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { AddBorrowComponent } from './components/add-borrow/add-borrow.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AddBorrowComponent } from './components/add-borrow/add-borrow.component
     AddBooksComponent,
     AddCustomerComponent,
     AddBorrowComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

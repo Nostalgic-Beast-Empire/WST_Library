@@ -1,13 +1,10 @@
 <div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Wypożyczalnia książek WST</a>
+    <a href="#" class="navbar-brand" routerLink="home">Biblioteka WST</a>
     <div class="navbar-nav mr-auto">
       <li class="nav-item">
         <a routerLink="listbookauthor" class="nav-link">Lista książek</a>
       </li>
-      <!-- <li class="nav-item">
-        <a routerLink="addauthors" class="nav-link">Dodaj Autora</a>
-      </li> -->
       <li class="nav-item">
         <a routerLink="listauthor" class="nav-link">Lista autorów</a>
       </li>
@@ -21,9 +18,18 @@
     </div>
   </nav>
  
-  
+
 
   <div class="container mt-3">
     <router-outlet></router-outlet>
   </div>
 </div>
+
+
+<footer class="footer fixed-bottom bg-dark text-center text-white">
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright: Kamil Kowalczyk & Denis Stanek
+  </div>
+
+</footer>

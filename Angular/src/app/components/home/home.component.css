@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+.text-box {
+  margin: 50px;
+}
+.text-bold {
+  font-size: 18px;
+  font-weight: 700;
+}

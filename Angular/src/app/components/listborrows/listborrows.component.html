@@ -1,3 +1,4 @@
+<div class="container">
 <div class="list row">
   <div class="col-md-8">
   </div>
@@ -82,7 +83,7 @@
         </select>
       </div>
 
-      <button (click)="EditBorrow()" [routerLink]="['/listborrow']" class="btn btn-success">Utwórz</button>
+      <button (click)="EditBorrow()" [routerLink]="['/listborrow']" class="editbtn btn btn-success">Edytuj</button>
   </div>
 
   </ng-container>
@@ -100,6 +101,7 @@
           />
       </div>
 
-      <button (click)="broughtBorrow()" [routerLink]="['/listborrow']" class="btn btn-success">Utwórz</button>
+      <button (click)="broughtBorrow()" [routerLink]="['/listborrow']" class="editbtn btn btn-success">Zwrot</button>
   </div>
-  </ng-container>
+  </ng-container>  
+</div>

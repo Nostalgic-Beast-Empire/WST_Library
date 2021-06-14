@@ -65,7 +65,10 @@ export class AddBorrowComponent implements OnInit {
         this.submitted = true
       },
 
-  error =>console.log(error)
+      error =>{
+        console.log(error);
+        alert("Nie podałeś wszystkich danych");
+      }
     );
   }
   getBooks(){
