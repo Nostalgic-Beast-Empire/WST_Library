@@ -22,5 +22,5 @@ Projekt biblioteki
 <br>
 <b>Angular:</b> Uruchomić folder Angular w programie Visual Studio Code i odpalić komedą ng serve --open,
 <br>
-<b>Baza Danych:</b> Plik "WST_Library Baza danych.sql" uruchomić w programie SSMS,
+<b>Baza Danych:</b> Plik "WST_Library Baza danych.sql" uruchomić w programie SSMS
  
