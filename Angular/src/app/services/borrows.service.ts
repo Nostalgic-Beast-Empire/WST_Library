@@ -26,6 +26,4 @@ export class BorrowsService {
   deleteById(id:number){
     return this.http.delete(`${baseUrl}/${id}`);
   }
-
-
 }

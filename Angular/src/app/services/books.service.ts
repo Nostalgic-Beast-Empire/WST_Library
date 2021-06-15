@@ -27,12 +27,4 @@ export class BooksService {
   deleteById(id:number){
     return this.http.delete(`${baseUrl}/${id}`);
   }
-  deleteAll(){
-    return this.http.delete(baseUrl);
-  }
-  findByName(bookname: string){
-    return this.http.get(`${baseUrl}?bookname=${bookname}`);
-  }
-
-
 }

@@ -27,12 +27,4 @@ export class AuthorsService {
   deleteById(id:number){
     return this.http.delete(`${baseUrl}/${id}`);
   }
-  deleteAll(){
-    return this.http.delete(baseUrl);
-  }
-  findByName(authorname: string){
-    return this.http.get(`${baseUrl}?authorname=${authorname}`);
-  }
-
-
 }

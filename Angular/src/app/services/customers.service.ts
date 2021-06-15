@@ -26,5 +26,4 @@ export class CustomersService {
   deleteById(id:number){
     return this.http.delete(`${baseUrl}/${id}`);
   }
-
 }
