@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,27 +9,57 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using System.Web.Mvc;
 using WSTLibrary.Models;
+using WSTLibrary.Repository;
 
 namespace WSTLibrary.Controllers
 {
-  [EnableCors(origins: "*", headers: "*", methods: "*")]
-  public class BooksController : ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class BooksController : ApiController
     {
-        private LibraryContext db = new LibraryContext();
+        private readonly IRepository<Book> _bookRepository;
 
-        // GET: api/Books
-        public IQueryable<Book> GetBook()
+        public BooksController(IRepository<Book> bookRepository)
         {
-            return db.Book.Include(c => c.author);
+            _bookRepository = bookRepository;
+
+        }
+
+        //CREATE
+
+
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult Create(Book Book)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var book = new Book
+                {
+                    author=Book.author,
+                    bookId = Book.bookId,
+                    authorId = Book.authorId,
+                    bookName = Book.bookName,
+                    pagecount = Book.pagecount
+
+                };
+
+                _bookRepository.Create(book);
+                return Ok(book);
+            }
+            return BadRequest();
         }
 
 
-        // GET: api/Books/5
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult GetBook(int id)
+
+        //READ
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult Get(int id)
         {
-            Book book = db.Book.Find(id);
+
+            var book = _bookRepository.GetById(id);
+
             if (book == null)
             {
                 return NotFound();
@@ -38,84 +68,57 @@ namespace WSTLibrary.Controllers
             return Ok(book);
         }
 
-        // PUT: api/Books/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutBook(int id, Book book)
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            if (id != book.bookId)
-            {
-                return BadRequest();
-            }
+            var book = _bookRepository.Include(c => c.author);
 
-            db.Entry(book).State = EntityState.Modified;
+          
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Books
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult PostBook(Book book)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Book.Add(book);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = book.bookId }, book);
-        }
-
-        // DELETE: api/Books/5
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult DeleteBook(int id)
-        {
-            Book book = db.Book.Find(id);
             if (book == null)
             {
                 return NotFound();
             }
 
-            db.Book.Remove(book);
-            db.SaveChanges();
-
             return Ok(book);
         }
 
-        protected override void Dispose(bool disposing)
+
+
+        //UPDATE
+        [System.Web.Http.HttpPut]
+
+        public IHttpActionResult Edit(int id,Book Book)
         {
-            if (disposing)
+            if (ModelState.IsValid)
             {
-                db.Dispose();
+                var book = _bookRepository.GetById(id);
+
+                book.author = Book.author;
+                //book.bookId = Book.bookId;
+                book.authorId = Book.authorId;
+                book.bookName = Book.bookName;
+                book.pagecount = Book.pagecount;
+
+                _bookRepository.Update(book);
+                return Ok(book);
             }
-            base.Dispose(disposing);
+
+            return BadRequest();
         }
 
-        private bool BookExists(int id)
+
+
+        //DELETE
+        [System.Web.Http.HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-            return db.Book.Count(e => e.bookId == id) > 0;
+            var book = _bookRepository.GetById(id);
+            _bookRepository.Delete(book);
+
+            return Ok();
         }
+
     }
 }

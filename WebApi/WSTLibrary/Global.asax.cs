@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using WSTLibrary.Models;
+using WSTLibrary.Repository;
 
 namespace WSTLibrary
 {
@@ -23,6 +24,10 @@ namespace WSTLibrary
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<LibraryContext>().InstancePerRequest();
+            builder.RegisterType<Repository<Book>>().AsImplementedInterfaces();
+            builder.RegisterType<Repository<Customer>>().AsImplementedInterfaces();
+            builder.RegisterType<Repository<Borrow>>().AsImplementedInterfaces();
+            builder.RegisterType<Repository<Author>>().AsImplementedInterfaces();
 
             var cointainer = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(cointainer));

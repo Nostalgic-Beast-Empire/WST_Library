@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,6 +17,8 @@ namespace WSTLibrary.Models
 
         public Customer customer { get; set; }
         public Book book { get; set; }
+
+
 
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +8,7 @@ namespace WSTLibrary.Models
 {
     public class Book
     {
+
         [Key]
         public int bookId { get; set; }
         public int authorId { get; set; }
@@ -17,7 +18,8 @@ namespace WSTLibrary.Models
         public string bookName { get; set; }
         public int? pagecount { get; set; }
 
-    public Author author { get; set; }
+        public Author author { get; set; }
+
 
     }
 }

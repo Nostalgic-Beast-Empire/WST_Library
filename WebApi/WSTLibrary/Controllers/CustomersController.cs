@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,26 +10,68 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WSTLibrary.Models;
+using WSTLibrary.Repository;
 
 namespace WSTLibrary.Controllers
 {
-  [EnableCors(origins: "*", headers: "*", methods: "*")]
-
-  public class CustomersController : ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class CustomersController : ApiController
     {
-        private LibraryContext db = new LibraryContext();
+        private readonly IRepository<Customer> _customerRepository;
+       
 
-        // GET: api/Customers
-        public IQueryable<Customer> GetCustomer()
+        public CustomersController(IRepository<Customer> customerRepository)
         {
-            return db.Customer;
+            _customerRepository = customerRepository;
+
+
+        }
+        //CREATE
+
+
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult Create(Customer Customer)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var customer = new Customer
+                {
+                    customerId = Customer.customerId,
+                    customerName=Customer.customerName,
+                    customerSurname=Customer.customerSurname,
+                    customerBirthdate=Customer.customerBirthdate
+
+                };
+
+                _customerRepository.Create(customer);
+                return Ok(customer);
+            }
+            return BadRequest();
         }
 
-        // GET: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult GetCustomer(int id)
+
+
+        //READ
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult Get(int id)
         {
-            Customer customer = db.Customer.Find(id);
+
+            var customer = _customerRepository.GetById(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(customer);
+        }
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetAll()
+        {
+
+            var customer = _customerRepository.Get();
+
             if (customer == null)
             {
                 return NotFound();
@@ -38,84 +80,39 @@ namespace WSTLibrary.Controllers
             return Ok(customer);
         }
 
-        // PUT: api/Customers/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCustomer(int id, Customer customer)
+
+
+        //UPDATE
+        [System.Web.Http.HttpPut]
+
+        public IHttpActionResult Edit(int id, Customer Customer)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var customer = _customerRepository.GetById(id);
+
+                //customer.customerId = Customer.customerId;
+                customer.customerName = Customer.customerName;
+                customer.customerSurname = Customer.customerSurname;
+                customer.customerBirthdate = Customer.customerBirthdate;
+
+                _customerRepository.Update(customer);
+                return Ok(customer);
             }
 
-            if (id != customer.customerId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(customer).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return BadRequest();
         }
 
-        // POST: api/Customers
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult PostCustomer(Customer customer)
+
+
+        //DELETE
+        [System.Web.Http.HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var customer = _customerRepository.GetById(id);
+            _customerRepository.Delete(customer);
 
-            db.Customer.Add(customer);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = customer.customerId }, customer);
-        }
-
-        // DELETE: api/Customers/5
-        [ResponseType(typeof(Customer))]
-        public IHttpActionResult DeleteCustomer(int id)
-        {
-            Customer customer = db.Customer.Find(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            db.Customer.Remove(customer);
-            db.SaveChanges();
-
-            return Ok(customer);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool CustomerExists(int id)
-        {
-            return db.Customer.Count(e => e.customerId == id) > 0;
+            return Ok();
         }
     }
 }

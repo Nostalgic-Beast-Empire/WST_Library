@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,26 +10,59 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WSTLibrary.Models;
+using WSTLibrary.Repository;
 
 namespace WSTLibrary.Controllers
 {
-  [EnableCors(origins: "*", headers: "*", methods: "*")]
-  public class BorrowsController : ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class BorrowsController : ApiController
     {
-        private LibraryContext db = new LibraryContext();
+        private readonly IRepository<Borrow> _borrowRepository;
+        
 
-        // GET: api/Borrows
-        public IQueryable<Borrow> GetBorrow()
+        public BorrowsController(IRepository<Borrow> borrowRepository)
         {
-           // return db.Borrow;
-      return db.Borrow.Include(c => c.book).Include(c => c.customer);
-    }
+            _borrowRepository = borrowRepository;
 
-        // GET: api/Borrows/5
-        [ResponseType(typeof(Borrow))]
-        public IHttpActionResult GetBorrow(int id)
+
+        }
+
+        //CREATE
+
+
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult Create(Borrow Borrow)
         {
-            Borrow borrow = db.Borrow.Find(id);
+            if (ModelState.IsValid)
+            {
+
+                var borrow = new Borrow
+                {
+                    customer=Borrow.customer,
+                    book=Borrow.book,
+                    borrowId = Borrow.borrowId,
+                    customerId=Borrow.customerId,
+                    bookId=Borrow.bookId,
+                    takenDate=Borrow.takenDate,
+                    broughtDate=Borrow.broughtDate
+
+                };
+
+                _borrowRepository.Create(borrow);
+                return Ok(borrow);
+            }
+            return BadRequest();
+        }
+
+
+
+        //READ
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+
+            var borrow = _borrowRepository.GetById(id);
+
             if (borrow == null)
             {
                 return NotFound();
@@ -38,84 +71,56 @@ namespace WSTLibrary.Controllers
             return Ok(borrow);
         }
 
-        // PUT: api/Borrows/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutBorrow(int id, Borrow borrow)
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            if (id != borrow.borrowId)
-            {
-                return BadRequest();
-            }
+            var borrow = _borrowRepository.Include(c => c.book).Include(c => c.customer);
 
-            db.Entry(borrow).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BorrowExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Borrows
-        [ResponseType(typeof(Borrow))]
-        public IHttpActionResult PostBorrow(Borrow borrow)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Borrow.Add(borrow);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = borrow.borrowId }, borrow);
-        }
-
-        // DELETE: api/Borrows/5
-        [ResponseType(typeof(Borrow))]
-        public IHttpActionResult DeleteBorrow(int id)
-        {
-            Borrow borrow = db.Borrow.Find(id);
             if (borrow == null)
             {
                 return NotFound();
             }
 
-            db.Borrow.Remove(borrow);
-            db.SaveChanges();
-
             return Ok(borrow);
         }
 
-        protected override void Dispose(bool disposing)
+
+
+        //UPDATE
+        [System.Web.Http.HttpPut]
+
+        public IHttpActionResult Edit(int id, Borrow Borrow)
         {
-            if (disposing)
+            if (ModelState.IsValid)
             {
-                db.Dispose();
+                var borrow = _borrowRepository.GetById(id);
+
+                //  borrow.borrowId = Borrow.borrowId;
+                borrow.customer = Borrow.customer;
+                borrow.book = Borrow.book;
+                borrow.customerId = Borrow.customerId;
+                borrow.bookId = Borrow.bookId;
+                borrow.takenDate = Borrow.takenDate;
+                borrow.broughtDate = Borrow.broughtDate;
+
+                _borrowRepository.Update(borrow);
+                return Ok(borrow);
             }
-            base.Dispose(disposing);
+
+            return BadRequest();
         }
 
-        private bool BorrowExists(int id)
+
+
+        //DELETE
+        [System.Web.Http.HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-            return db.Borrow.Count(e => e.borrowId == id) > 0;
+            var borrow = _borrowRepository.GetById(id);
+            _borrowRepository.Delete(borrow);
+
+            return Ok();
         }
     }
 }
