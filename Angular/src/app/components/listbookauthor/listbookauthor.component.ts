@@ -16,8 +16,8 @@ export class ListbookauthorComponent implements OnInit {
   books: any=[];
   public show:boolean = false;
   Id:number = 0;
+  name:string='';
 
-  //authors: any=[];
   book: Book={
 
 
@@ -74,9 +74,10 @@ export class ListbookauthorComponent implements OnInit {
       }
     );
     }
-  toggle(id:number) {
+  toggle(id:number, name:string) {
     this.show = !this.show;
     this.Id = id;
+    this.name=name;
     if(!this.show){
       this.Id = 0;
     }
@@ -105,12 +106,11 @@ export class ListbookauthorComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          window.location.reload(); 
         },
         error => {
           console.log(error);
-        });
-  
-        window.location.reload(); 
+        });   
   }
   }
 

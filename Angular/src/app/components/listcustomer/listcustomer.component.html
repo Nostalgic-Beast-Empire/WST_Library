@@ -26,7 +26,7 @@
       <td>{{ customer.customerName }}</td>
       <td>{{ customer.customerSurname }}</td>
       <td>{{ customer.customerBirthdate }}</td>
-      <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(customer.customerId)" (click)="toggle(customer.customerId)">Edytuj</button></td>
+      <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(customer.customerId)" (click)="toggle(customer.customerId,customer.customerName,customer.customerSurname)">Edytuj</button></td>
       <td><button type="button" class="btn btn-danger" (click) = "DeleteCustomer(customer.customerId)">Usuń</button></td>
         
         
@@ -53,6 +53,7 @@
               type = "text"
               class = "form-control"
               required
+              placeholder="{{name}}"
               [(ngModel)]="customer.customerName"
               name="customername"
           />
@@ -64,6 +65,7 @@
               type = "text"
               class = "form-control"
               required
+              placeholder="{{surname}}"
               [(ngModel)]="customer.customerSurname"
               name="customerSurname"
           />

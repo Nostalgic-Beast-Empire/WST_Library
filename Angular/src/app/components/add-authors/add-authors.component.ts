@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {Author} from 'src/app/models/authors';
 import {AuthorsService} from 'src/app/services/authors.service';
@@ -15,9 +16,9 @@ export class AddAuthorsComponent implements OnInit {
     authorId: 0
 
   };
-  submitted: boolean = false;
 
-  constructor(private authorService: AuthorsService) { }
+  constructor(private authorService: AuthorsService,private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +34,7 @@ export class AddAuthorsComponent implements OnInit {
     .subscribe(
       response => {
         console.log(response);
-        this.submitted = true
+        this.router.navigate(['/listauthor']);
       },
 
       error =>{

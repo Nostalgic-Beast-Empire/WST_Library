@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {Customer} from 'src/app/models/customers';
 import {CustomersService} from 'src/app/services/customers.service';
@@ -18,7 +19,8 @@ export class AddCustomerComponent implements OnInit {
 
   };
 
-  constructor(private customerService: CustomersService) { }
+  constructor(private customerService: CustomersService,private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -35,6 +37,7 @@ export class AddCustomerComponent implements OnInit {
     .subscribe(
       response => {
         console.log(response);
+        this.router.navigate(['/listcustomer']);
       },
 
       error =>{

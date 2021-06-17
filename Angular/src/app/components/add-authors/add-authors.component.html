@@ -1,5 +1,5 @@
 <div class="submit-form">
-    <div *ngIf='!submitted'>
+    
         <div class="form-group">
             <label for="authorname">Imię Autora</label>
             <input
@@ -22,8 +22,8 @@
             />
         </div>
 
-        <button (click)="saveAuthor()" [routerLink]="['/listauthor']" class="editbtn btn btn-success">Utwórz</button>
-    </div>
+        <button (click)="saveAuthor()" class="editbtn btn btn-success">Utwórz</button>
+    
 
 </div>
 

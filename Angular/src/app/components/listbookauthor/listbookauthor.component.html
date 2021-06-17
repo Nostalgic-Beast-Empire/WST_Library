@@ -28,7 +28,7 @@
       <td>{{ book.pagecount }}</td>
       <td>{{ book.author.authorName }}</td>
       <td>{{ book.author.authorSurname }}</td>
-      <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(book.bookId)" (click)="toggle(book.bookId)">Edytuj</button></td>
+      <td><button type="button" class="btn btn-dark" [disabled]="shouldDisable(book.bookId)" (click)="toggle(book.bookId, book.bookName)">Edytuj</button></td>
       <td><button type="button" class="btn btn-danger" (click)="DeleteBook(book.bookId)" >Usuń</button></td>
         
         
@@ -54,6 +54,7 @@
               type = "text"
               class = "form-control"
               required
+              placeholder="{{name}}"
               [(ngModel)]="book.bookName"
               name="bookName"
           />

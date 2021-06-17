@@ -147,12 +147,13 @@ EditBorrow() {
     .subscribe(
       response => {
         console.log(response);
+        window.location.reload(); 
       },
       error => {
         console.log(error);
       });
 
-      window.location.reload(); 
+      
 }
 broughtBorrow(){
 
@@ -169,11 +170,11 @@ broughtBorrow(){
     .subscribe(
       response => {
         console.log(response);
+        window.location.reload();
       },
       error => {
         console.log(error);
       });
-
-      window.location.reload(); 
+          
 }
 }

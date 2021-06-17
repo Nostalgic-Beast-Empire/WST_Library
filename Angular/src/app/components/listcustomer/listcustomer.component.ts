@@ -9,6 +9,8 @@ import {CustomersService} from 'src/app/services/customers.service';
 })
 export class ListcustomerComponent implements OnInit {
   customers: any=[];
+  name:string='';
+  surname:string='';
 
   customer: Customer={
     customerName:'',
@@ -38,7 +40,6 @@ export class ListcustomerComponent implements OnInit {
         console.log(error);
       }
     );
-
 }
 DeleteCustomer(id: number){
   this.customersService.deleteById(id)
@@ -51,9 +52,11 @@ DeleteCustomer(id: number){
       console.log(error);
     });
 }
-toggle(id:number) {
+toggle(id:number, name:string, surname:string) {
   this.show = !this.show;
   this.Id = id;
+  this.name=name;
+  this.surname=surname;
   if(!this.show){
     this.Id = 0;
   }
@@ -80,11 +83,10 @@ EditCustomer() {
     .subscribe(
       response => {
         console.log(response);
+        window.location.reload(); 
       },
       error => {
         console.log(error);
-      });
-
-      window.location.reload(); 
+      });  
 }
 }

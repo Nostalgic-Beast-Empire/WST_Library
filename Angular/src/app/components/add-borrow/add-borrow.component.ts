@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BorrowsService } from 'src/app/services/borrows.service';
 import {BooksService} from 'src/app/services/books.service';
@@ -40,9 +41,10 @@ export class AddBorrowComponent implements OnInit {
     broughtDate: 'Nie oddana',
   }
 
-  submitted: boolean = false;
 
-  constructor(private booksService: BooksService,private customersService: CustomersService, private borrowService: BorrowsService) { }
+
+  constructor(private booksService: BooksService,private customersService: CustomersService, private borrowService: BorrowsService,private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getBooks();
@@ -62,7 +64,7 @@ export class AddBorrowComponent implements OnInit {
     .subscribe(
       response => {
         console.log(response);
-        this.submitted = true
+        this.router.navigate(['/listborrow']);
       },
 
       error =>{

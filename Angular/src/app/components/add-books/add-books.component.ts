@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Author } from 'src/app/models/authors';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {Book} from 'src/app/models/books';
 import { AuthorsService } from 'src/app/services/authors.service';
@@ -22,9 +23,10 @@ export class AddBooksComponent implements OnInit {
 
 
   };
-  submitted: boolean = false;
 
-  constructor(private booksService: BooksService,private authorService: AuthorsService) { }
+
+  constructor(private booksService: BooksService,private authorService: AuthorsService,private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getAuthors();
@@ -42,7 +44,7 @@ export class AddBooksComponent implements OnInit {
     .subscribe(
       response => {
         console.log(response);
-        this.submitted = true
+        this.router.navigate(['/listbookauthor']);
       },
 
   error =>{

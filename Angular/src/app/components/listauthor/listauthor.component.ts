@@ -12,6 +12,8 @@ export class ListauthorComponent implements OnInit {
   authors: any=[];
 
   Id:number = 0;
+  name:string='';
+  surname:string='';
   author: Author={
     authorName:'',
     authorSurname:'',
@@ -37,8 +39,6 @@ export class ListauthorComponent implements OnInit {
         console.log(error);
       }
     );
-
-   
 }
 
 DeleteAuthor(id: number){
@@ -53,9 +53,12 @@ DeleteAuthor(id: number){
     });
 }
 
-toggle(id:number) {
+toggle(id:number, name:string, surname:string) {
   this.show = !this.show;
   this.Id = id;
+  this.name=name;
+  this.surname=surname;
+
   if(!this.show){
     this.Id = 0;
   }
@@ -83,11 +86,10 @@ EditAuthor() {
     .subscribe(
       response => {
         console.log(response);
+        window.location.reload(); 
       },
       error => {
         console.log(error);
-      });
-
-      window.location.reload(); 
+      });  
 }
 }
